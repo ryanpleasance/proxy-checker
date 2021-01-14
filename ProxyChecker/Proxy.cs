@@ -25,6 +25,8 @@ namespace ProxyChecker
             {
                 switch (isWorking)
                 {
+                    case null:
+                        return "Unknown";
                     case true:
                         return "Working";
                     case false:
@@ -35,16 +37,17 @@ namespace ProxyChecker
             }
         }
 
-        public Proxy(IPEndPoint endPoint, string type = null)
+        public Proxy(IPEndPoint endPoint, bool? isWorking = null)
         {
             this.IPEndPoint = endPoint;
-            this.Type = type;
+            this.isWorking = isWorking;
         }
-        public Proxy(IPEndPoint endPoint, string username, string password)
+        public Proxy(IPEndPoint endPoint, string username, string password, bool? isWorking = null)
         {
             this.IPEndPoint = endPoint;
             this.Username = username;
             this.Password = password;
+            this.isWorking = isWorking;
         }
 
         public void PerformTestA(string Url)
@@ -93,6 +96,19 @@ namespace ProxyChecker
                 IPAddress ip;
                 IPAddress.TryParse(ipStr, out ip);
 
+                if (ip == null)
+                {
+                    var addresses = Dns.GetHostAddresses(ipStr);
+
+                    if (addresses.Length == 0)
+                    {
+                        return null;
+                    } else
+                    {
+                        ip = addresses[0];
+                    }
+                }
+
                 if (parts.Length > 2)
                 {
                     string username = parts[2];
@@ -123,8 +139,6 @@ namespace ProxyChecker
             request.Timeout = 2000;
             request.ReadWriteTimeout = 100000;
             request.Method = "HEAD";
-
-           
 
             if (!string.IsNullOrWhiteSpace(proxy.Username))
             {

@@ -28,10 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainFrom));
             this.ProxyDataGridView = new System.Windows.Forms.DataGridView();
+            this.IP = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PORT = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AUTH = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SPEED = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.STATUS = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnAddProxy = new System.Windows.Forms.Button();
             this.btnStartTestA = new System.Windows.Forms.Button();
             this.btnExport = new System.Windows.Forms.Button();
@@ -42,11 +47,6 @@
             this.progressLabel = new System.Windows.Forms.Label();
             this.titleLabel = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.IP = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PORT = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.AUTH = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SPEED = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.STATUS = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.ProxyDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -63,14 +63,14 @@
             this.ProxyDataGridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.ProxyDataGridView.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.ProxyDataGridView.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Corbel", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.ProxyDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Corbel", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.ProxyDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.ProxyDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.ProxyDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.IP,
@@ -78,14 +78,14 @@
             this.AUTH,
             this.SPEED,
             this.STATUS});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Corbel", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.ProxyDataGridView.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Corbel", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.ProxyDataGridView.DefaultCellStyle = dataGridViewCellStyle6;
             this.ProxyDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.ProxyDataGridView.Location = new System.Drawing.Point(12, 194);
             this.ProxyDataGridView.Name = "ProxyDataGridView";
@@ -100,119 +100,8 @@
             this.ProxyDataGridView.ShowRowErrors = false;
             this.ProxyDataGridView.Size = new System.Drawing.Size(738, 288);
             this.ProxyDataGridView.TabIndex = 0;
+            this.ProxyDataGridView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.ProxyDataGridView_CellFormatting);
             this.ProxyDataGridView.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.ProxyDataGridView_RowsRemoved);
-            // 
-            // btnAddProxy
-            // 
-            this.btnAddProxy.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnAddProxy.Font = new System.Drawing.Font("Corbel", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddProxy.Location = new System.Drawing.Point(12, 500);
-            this.btnAddProxy.Name = "btnAddProxy";
-            this.btnAddProxy.Size = new System.Drawing.Size(130, 38);
-            this.btnAddProxy.TabIndex = 1;
-            this.btnAddProxy.Text = "Add Proxies";
-            this.btnAddProxy.UseVisualStyleBackColor = true;
-            this.btnAddProxy.Click += new System.EventHandler(this.btnAddProxy_Click);
-            // 
-            // btnStartTestA
-            // 
-            this.btnStartTestA.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnStartTestA.Font = new System.Drawing.Font("Corbel", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnStartTestA.Location = new System.Drawing.Point(316, 500);
-            this.btnStartTestA.Name = "btnStartTestA";
-            this.btnStartTestA.Size = new System.Drawing.Size(130, 38);
-            this.btnStartTestA.TabIndex = 2;
-            this.btnStartTestA.Text = "Quick Test";
-            this.btnStartTestA.UseVisualStyleBackColor = true;
-            this.btnStartTestA.Click += new System.EventHandler(this.btnStartTestA_Click);
-            // 
-            // btnExport
-            // 
-            this.btnExport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnExport.Font = new System.Drawing.Font("Corbel", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExport.Location = new System.Drawing.Point(620, 500);
-            this.btnExport.Name = "btnExport";
-            this.btnExport.Size = new System.Drawing.Size(130, 38);
-            this.btnExport.TabIndex = 3;
-            this.btnExport.Text = "Filtered Export ";
-            this.btnExport.UseVisualStyleBackColor = true;
-            // 
-            // btnRemoveAll
-            // 
-            this.btnRemoveAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnRemoveAll.Font = new System.Drawing.Font("Corbel", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRemoveAll.Location = new System.Drawing.Point(164, 500);
-            this.btnRemoveAll.Name = "btnRemoveAll";
-            this.btnRemoveAll.Size = new System.Drawing.Size(130, 38);
-            this.btnRemoveAll.TabIndex = 6;
-            this.btnRemoveAll.Text = "Clear All Proxies";
-            this.btnRemoveAll.UseVisualStyleBackColor = true;
-            this.btnRemoveAll.Click += new System.EventHandler(this.btnRemoveAll_Click);
-            // 
-            // btnStartTestB
-            // 
-            this.btnStartTestB.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnStartTestB.Font = new System.Drawing.Font("Corbel", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnStartTestB.Location = new System.Drawing.Point(468, 500);
-            this.btnStartTestB.Name = "btnStartTestB";
-            this.btnStartTestB.Size = new System.Drawing.Size(130, 38);
-            this.btnStartTestB.TabIndex = 2;
-            this.btnStartTestB.Text = "Pro Test";
-            this.btnStartTestB.UseVisualStyleBackColor = true;
-            this.btnStartTestB.Click += new System.EventHandler(this.btnStartTestB_Click);
-            // 
-            // tbUrl
-            // 
-            this.tbUrl.Font = new System.Drawing.Font("Corbel", 12F);
-            this.tbUrl.Location = new System.Drawing.Point(43, 106);
-            this.tbUrl.Name = "tbUrl";
-            this.tbUrl.Size = new System.Drawing.Size(675, 27);
-            this.tbUrl.TabIndex = 7;
-            this.tbUrl.Text = "http://www.google.com";
-            this.tbUrl.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // progressBar
-            // 
-            this.progressBar.Location = new System.Drawing.Point(12, 160);
-            this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(738, 28);
-            this.progressBar.TabIndex = 8;
-            // 
-            // progressLabel
-            // 
-            this.progressLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.progressLabel.AutoSize = true;
-            this.progressLabel.Font = new System.Drawing.Font("Corbel", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.progressLabel.Location = new System.Drawing.Point(500, 134);
-            this.progressLabel.MinimumSize = new System.Drawing.Size(250, 23);
-            this.progressLabel.Name = "progressLabel";
-            this.progressLabel.Size = new System.Drawing.Size(250, 23);
-            this.progressLabel.TabIndex = 9;
-            this.progressLabel.Text = "0 / 0 Proxies Tested";
-            this.progressLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // titleLabel
-            // 
-            this.titleLabel.AutoSize = true;
-            this.titleLabel.Font = new System.Drawing.Font("Corbel", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.titleLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(25)))), ((int)(((byte)(70)))));
-            this.titleLabel.Location = new System.Drawing.Point(12, 62);
-            this.titleLabel.MinimumSize = new System.Drawing.Size(738, 33);
-            this.titleLabel.Name = "titleLabel";
-            this.titleLabel.Size = new System.Drawing.Size(738, 33);
-            this.titleLabel.TabIndex = 10;
-            this.titleLabel.Text = "RYXX x SlickRentals Proxy Filter";
-            this.titleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox1.Location = new System.Drawing.Point(12, 2);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(738, 57);
-            this.pictureBox1.TabIndex = 11;
-            this.pictureBox1.TabStop = false;
             // 
             // IP
             // 
@@ -252,6 +141,119 @@
             this.STATUS.HeaderText = "STATUS";
             this.STATUS.Name = "STATUS";
             this.STATUS.ReadOnly = true;
+            // 
+            // btnAddProxy
+            // 
+            this.btnAddProxy.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnAddProxy.Font = new System.Drawing.Font("Corbel", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddProxy.Location = new System.Drawing.Point(12, 500);
+            this.btnAddProxy.Name = "btnAddProxy";
+            this.btnAddProxy.Size = new System.Drawing.Size(130, 38);
+            this.btnAddProxy.TabIndex = 1;
+            this.btnAddProxy.Text = "Add Proxies";
+            this.btnAddProxy.UseVisualStyleBackColor = true;
+            this.btnAddProxy.Click += new System.EventHandler(this.btnAddProxy_Click);
+            // 
+            // btnStartTestA
+            // 
+            this.btnStartTestA.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnStartTestA.Font = new System.Drawing.Font("Corbel", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnStartTestA.Location = new System.Drawing.Point(316, 500);
+            this.btnStartTestA.Name = "btnStartTestA";
+            this.btnStartTestA.Size = new System.Drawing.Size(130, 38);
+            this.btnStartTestA.TabIndex = 2;
+            this.btnStartTestA.Text = "Quick Test";
+            this.btnStartTestA.UseVisualStyleBackColor = true;
+            this.btnStartTestA.Click += new System.EventHandler(this.btnStartTestA_Click);
+            // 
+            // btnExport
+            // 
+            this.btnExport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnExport.Font = new System.Drawing.Font("Corbel", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExport.Location = new System.Drawing.Point(620, 500);
+            this.btnExport.Name = "btnExport";
+            this.btnExport.Size = new System.Drawing.Size(130, 38);
+            this.btnExport.TabIndex = 3;
+            this.btnExport.Text = "Filtered Export ";
+            this.btnExport.UseVisualStyleBackColor = true;
+            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
+            // 
+            // btnRemoveAll
+            // 
+            this.btnRemoveAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnRemoveAll.Font = new System.Drawing.Font("Corbel", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRemoveAll.Location = new System.Drawing.Point(164, 500);
+            this.btnRemoveAll.Name = "btnRemoveAll";
+            this.btnRemoveAll.Size = new System.Drawing.Size(130, 38);
+            this.btnRemoveAll.TabIndex = 6;
+            this.btnRemoveAll.Text = "Clear All Proxies";
+            this.btnRemoveAll.UseVisualStyleBackColor = true;
+            this.btnRemoveAll.Click += new System.EventHandler(this.btnRemoveAll_Click);
+            // 
+            // btnStartTestB
+            // 
+            this.btnStartTestB.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnStartTestB.Font = new System.Drawing.Font("Corbel", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnStartTestB.Location = new System.Drawing.Point(468, 500);
+            this.btnStartTestB.Name = "btnStartTestB";
+            this.btnStartTestB.Size = new System.Drawing.Size(130, 38);
+            this.btnStartTestB.TabIndex = 2;
+            this.btnStartTestB.Text = "Page Load Test";
+            this.btnStartTestB.UseVisualStyleBackColor = true;
+            this.btnStartTestB.Click += new System.EventHandler(this.btnStartTestB_Click);
+            // 
+            // tbUrl
+            // 
+            this.tbUrl.Font = new System.Drawing.Font("Corbel", 12F);
+            this.tbUrl.Location = new System.Drawing.Point(43, 106);
+            this.tbUrl.Name = "tbUrl";
+            this.tbUrl.Size = new System.Drawing.Size(675, 27);
+            this.tbUrl.TabIndex = 7;
+            this.tbUrl.Text = "http://www.google.com";
+            this.tbUrl.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // progressBar
+            // 
+            this.progressBar.Location = new System.Drawing.Point(12, 160);
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(738, 28);
+            this.progressBar.TabIndex = 8;
+            // 
+            // progressLabel
+            // 
+            this.progressLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.progressLabel.AutoSize = true;
+            this.progressLabel.Font = new System.Drawing.Font("Corbel", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.progressLabel.Location = new System.Drawing.Point(200, 134);
+            this.progressLabel.MinimumSize = new System.Drawing.Size(550, 23);
+            this.progressLabel.Name = "progressLabel";
+            this.progressLabel.Size = new System.Drawing.Size(550, 23);
+            this.progressLabel.TabIndex = 9;
+            this.progressLabel.Text = "0 / 0 Proxies Tested";
+            this.progressLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // titleLabel
+            // 
+            this.titleLabel.AutoSize = true;
+            this.titleLabel.Font = new System.Drawing.Font("Corbel", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.titleLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(25)))), ((int)(((byte)(70)))));
+            this.titleLabel.Location = new System.Drawing.Point(12, 62);
+            this.titleLabel.MinimumSize = new System.Drawing.Size(738, 33);
+            this.titleLabel.Name = "titleLabel";
+            this.titleLabel.Size = new System.Drawing.Size(738, 33);
+            this.titleLabel.TabIndex = 10;
+            this.titleLabel.Text = "RYXX x SlickRentals Proxy Filter";
+            this.titleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pictureBox1.Location = new System.Drawing.Point(12, 2);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(738, 57);
+            this.pictureBox1.TabIndex = 11;
+            this.pictureBox1.TabStop = false;
             // 
             // MainFrom
             // 

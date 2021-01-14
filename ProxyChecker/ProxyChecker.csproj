@@ -51,6 +51,12 @@
     <Compile Include="AddProxyForm.Designer.cs">
       <DependentUpon>AddProxyForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="FilteredExport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FilteredExport.Designer.cs">
+      <DependentUpon>FilteredExport.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainFrom.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -62,6 +68,9 @@
     <Compile Include="Proxy.cs" />
     <EmbeddedResource Include="AddProxyForm.resx">
       <DependentUpon>AddProxyForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FilteredExport.resx">
+      <DependentUpon>FilteredExport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainFrom.resx">
       <DependentUpon>MainFrom.cs</DependentUpon>

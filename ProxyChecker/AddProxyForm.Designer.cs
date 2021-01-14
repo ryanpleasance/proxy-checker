@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddProxyForm));
             this.btnOk = new System.Windows.Forms.Button();
             this.proxyTextBox = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
@@ -66,6 +67,7 @@
             this.Controls.Add(this.proxyTextBox);
             this.Controls.Add(this.btnOk);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "AddProxyForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Add Proxy";
