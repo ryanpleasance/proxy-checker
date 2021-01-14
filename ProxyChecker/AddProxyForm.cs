@@ -47,5 +47,19 @@ namespace ProxyChecker
 
             return proxyList;
         }
+
+        private void proxyTextBox_Enter(object sender, EventArgs e)
+        {
+            if (proxyTextBox.Text == "IP:PORT:USERNAME:PASSWORD")
+            {
+                proxyTextBox.Text = "";
+            }
+        }
+
+        private void proxyTextBox_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(proxyTextBox.Text))
+                proxyTextBox.Text = "IP:PORT:USERNAME:PASSWORD";
+        }
     }
 }
