@@ -37,11 +37,23 @@ namespace ProxyChecker
                 string line;
                 while ((line = reader.ReadLine()) != null)
                 {
-                    Proxy p = Proxy.Parse(line);
-                    if (p != null)
+                    try
                     {
-                        proxyList.Add(p);
-                    }                    
+                        string[] parts = line.Split(':');
+
+                        if (parts.Length > 2)
+                        {
+                            proxyList.Add(new Proxy(parts[0], Convert.ToInt32(parts[1]), parts[2], parts[3]));
+                        }
+                        else
+                        {
+                            proxyList.Add(new Proxy(parts[0], Convert.ToInt32(parts[1])));
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        // ignored
+                    }
                 }
             }
             return proxyList;

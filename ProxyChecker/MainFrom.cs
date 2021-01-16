@@ -31,21 +31,30 @@ namespace ProxyChecker
         {
             try
             {
+                this.Enabled = false;
+
+                // Get input from user
                 AddProxyForm form = new AddProxyForm();
                 form.ShowDialog();
                 if (form.DialogResult == DialogResult.OK)
                 {
                     proxyList = form.GetData();
                 }
-                Cursor.Current = Cursors.WaitCursor;
-                Application.DoEvents();
+
+                // Populate Datagridview based off input
                 foreach (Proxy p in proxyList)
                 {
                     int pIndex = proxyList.IndexOf(p);
-                    proxyList[pIndex].RowIndex = ProxyDataGridView.Rows.Add(p.IPEndPoint.Address, p.IPEndPoint.Port, p.Username + ":" + p.Password, p.Speed, p.Status);
-                }
-                Cursor.Current = Cursors.Default;
 
+                    if (p.Username != null)
+                    {
+                        proxyList[pIndex].RowIndex = ProxyDataGridView.Rows.Add(p.Domain, p.Port, p.Username + ":" + p.Password, null, p.Status);
+                    } else
+                    {
+                        proxyList[pIndex].RowIndex = ProxyDataGridView.Rows.Add(p.Domain, p.Port, "", null, p.Status);
+                    }
+                }
+                this.Enabled = true;
                 proxyNum = this.proxyList.Count;
                 progressLabel.Text = String.Format("{0} / {1} Proxies Tested", proxyTested, proxyNum);
             }
@@ -59,6 +68,7 @@ namespace ProxyChecker
 
         private void testProxyList(bool fast)
         {
+            this.Enabled = false;
             try
             {
                 proxyNum = this.proxyList.Count;
@@ -72,8 +82,12 @@ namespace ProxyChecker
                             this.MarkTesting(proxy);
                         });
 
-                        if (fast) proxy.PerformTestA(tbUrl.Text);
-                        else proxy.PerformTestB(tbUrl.Text);
+                        ProxyTestResult result;
+                        if (fast) result = ProxyTester.QuickTest(proxy, tbUrl.Text);
+                        else result = ProxyTester.PageLoadTest(proxy, tbUrl.Text);
+
+                        proxy.Speed = result.Speed;
+                        proxy.Status = result.Status;
 
                         ++proxyTested;
                         this.BeginInvoke((MethodInvoker)delegate
@@ -88,7 +102,9 @@ namespace ProxyChecker
             catch (Exception ex)
             {
                 MessageBox.Show("Error 1! Error logged and sent off to be fixed");
+                
             }
+            this.Enabled = true;
         }
 
         private void MarkTesting(Proxy p)
@@ -121,7 +137,18 @@ namespace ProxyChecker
         {
             try
             {
-                UpdateTable(p);
+                DataGridViewRow row = ProxyDataGridView.Rows[p.RowIndex];
+                if (p.Speed > 0)
+                {
+                    row.Cells[4].Value = p.Speed;
+                }
+                else
+                {
+                    row.Cells[4].Value = null;
+                }
+                row.Cells[5].Value = p.Status;
+                progressLabel.Text = String.Format("{0} / {1} Proxies Tested", proxyTested, proxyNum);
+
                 if (proxyTested > 0)
                 {
                     progressBar.Value = Convert.ToInt16(proxyTested * 100.0 / proxyNum);
@@ -130,27 +157,6 @@ namespace ProxyChecker
             catch (Exception ex)
             {
                 MessageBox.Show("Error 4! Error logged and sent off to be fixed");
-            }
-        }
-        private void UpdateTable(Proxy p)
-        {
-            try
-            {
-                DataGridViewRow row = ProxyDataGridView.Rows[p.RowIndex];
-                if (p.Speed > 0)
-                {
-                    row.Cells[3].Value = p.Speed;
-                }
-                else
-                {
-                    row.Cells[3].Value = "";
-                }
-                row.Cells[4].Value = p.Status;
-                progressLabel.Text = String.Format("{0} / {1} Proxies Tested", proxyTested, proxyNum);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error 5! Error logged and sent off to be fixed");
             }
         }
 
@@ -179,13 +185,11 @@ namespace ProxyChecker
 
                     if (string.IsNullOrWhiteSpace(row.Cells[2].Value.ToString())) // not auth
                     {
-                        string auth = row.Cells[2].Value.ToString();
-
-                        proxyList.Add(Proxy.Parse(ip + ":" + port + ":" + auth));
+                        proxyList.Add(new Proxy(row.Cells[0].Value.ToString(), Convert.ToInt32(row.Cells[1].Value.ToString()), row.Cells[2].Value.ToString(), row.Cells[3].Value.ToString()));
                     }
                     else
                     {
-                        proxyList.Add(Proxy.Parse(ip + ":" + port));
+                        proxyList.Add(new Proxy(row.Cells[0].Value.ToString(), Convert.ToInt32(row.Cells[1].Value.ToString())));
                     }
                 }
             }
@@ -202,6 +206,7 @@ namespace ProxyChecker
                 if (this.ProxyDataGridView.Columns[e.ColumnIndex].Name == "SPEED")
                 {
                     e.Value = e.Value?.ToString().Replace(" ms", "");
+                    e.CellStyle.Font = new Font(e.CellStyle.Font.FontFamily, 12F);
 
                     if (!string.IsNullOrWhiteSpace(e.Value?.ToString()))
                     {
@@ -215,7 +220,7 @@ namespace ProxyChecker
                         else if (value < 1000)
                         {
                             e.CellStyle.ForeColor = Color.Orange;
-                        }
+                        } 
                         else
                         {
                             e.CellStyle.ForeColor = Color.Red;
@@ -253,21 +258,23 @@ namespace ProxyChecker
 
                 foreach (DataGridViewRow row in ProxyDataGridView.Rows)
                 {
-                    if (row.Cells[4].Value.ToString() == "Working")
+                    if (row.Cells[5].Value.ToString() == "Working")
                     {
-                        double speed = Convert.ToDouble(row.Cells[3].Value.ToString());
+                        double speed = Convert.ToDouble(row.Cells[4].Value.ToString());
 
                         if (speed <= speedFilter)
                         {
                             string ip = row.Cells[0].Value.ToString();
                             string port = row.Cells[1].Value.ToString();
-                            string auth = "";
+                            string user = "";
+                            string pass = "";
 
                             if (!string.IsNullOrWhiteSpace(row.Cells[2].Value.ToString())) // not auth
                             {
-                                auth = row.Cells[2].Value.ToString();
+                                user = row.Cells[2].Value.ToString();
+                                pass = row.Cells[3].Value.ToString();
 
-                                exportProxies.Add(ip + ":" + port + ":" + auth);
+                                exportProxies.Add(ip + ":" + port + ":" + user + ":" + pass);
                             }
                             else
                             {
@@ -314,14 +321,16 @@ namespace ProxyChecker
 
         private void EstimateTimeLeft()
         {
-            DateTime timeNow = DateTime.Now;
-            double elapsedTime = (timeNow - startTime).TotalSeconds;
+            if (proxyNum != proxyTested)
+            {
+                DateTime timeNow = DateTime.Now;
+                double elapsedTime = (timeNow - startTime).TotalSeconds;
 
-            double timeLeft = (elapsedTime / proxyTested) * (proxyNum - proxyTested);
+                double timeLeft = (elapsedTime / proxyTested) * (proxyNum - proxyTested);
 
-            progressLabel.Text += string.Format(" | Estimated {0}s left", Math.Round(timeLeft,0));
+                progressLabel.Text += string.Format(" | Estimated {0}s left", Math.Round(timeLeft, 0));
+            }
         }
-
     }
  }
 
