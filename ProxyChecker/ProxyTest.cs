@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ProxyChecker
 {
-    class ProxyTester
+    internal class ProxyTester
     {
         public static ProxyTestResult QuickTest(Proxy proxy, string Url)
         {
@@ -32,10 +32,10 @@ namespace ProxyChecker
                 request.Proxy = Proxy.Parse(proxy);
 
                 sw.Start();
-                WebResponse response = request.GetResponse();
+                var response = request.GetResponse();
                 sw.Stop();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return new ProxyTestResult("Timed out");
             }
@@ -44,9 +44,9 @@ namespace ProxyChecker
 
         public static ProxyTestResult PageLoadTest(Proxy proxy, string Url)
         {
-            Stopwatch sw = new Stopwatch();
+            var sw = new Stopwatch();
 
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(new Uri(Url));
+            var request = (HttpWebRequest)WebRequest.Create(new Uri(Url));
 
             request.UserAgent = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36";
             request.Timeout = 2000;
@@ -63,7 +63,7 @@ namespace ProxyChecker
                 request.Proxy = Proxy.Parse(proxy);
 
                 sw.Start();
-                WebResponse response = request.GetResponse();
+                var response = request.GetResponse();
                 sw.Stop();
             }
             catch (Exception)

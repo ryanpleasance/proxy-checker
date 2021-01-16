@@ -33,9 +33,9 @@ namespace ProxyChecker
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
             ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
 
-            WebProxy parsedProxy = new WebProxy();
+            var parsedProxy = new WebProxy();
 
-            IPAddress[] ip = Dns.GetHostAddresses(input.Domain); // will throw exception if it cant resolve IP
+            var ip = Dns.GetHostAddresses(input.Domain); // will throw exception if it cant resolve IP
 
             parsedProxy.Address = new Uri("http://" + ip[0] + ":" + input.Port);
 

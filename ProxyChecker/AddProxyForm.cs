@@ -23,34 +23,24 @@ namespace ProxyChecker
             this.DialogResult = DialogResult.OK;
         }
 
-        private void btnStorno_Click(object sender, EventArgs e)
-        {
-            this.DialogResult = DialogResult.Cancel;
-        }
-
         public IList<Proxy> GetData()
         {
             IList<Proxy> proxyList = new List<Proxy>();
 
-            using (StringReader reader = new StringReader(this.proxyTextBox.Text))
+            using (var reader = new StringReader(this.proxyTextBox.Text))
             {
                 string line;
                 while ((line = reader.ReadLine()) != null)
                 {
                     try
                     {
-                        string[] parts = line.Split(':');
+                        var parts = line.Split(':');
 
-                        if (parts.Length > 2)
-                        {
-                            proxyList.Add(new Proxy(parts[0], Convert.ToInt32(parts[1]), parts[2], parts[3]));
-                        }
-                        else
-                        {
-                            proxyList.Add(new Proxy(parts[0], Convert.ToInt32(parts[1])));
-                        }
+                        proxyList.Add(parts.Length > 2
+                            ? new Proxy(parts[0], Convert.ToInt32(parts[1]), parts[2], parts[3])
+                            : new Proxy(parts[0], Convert.ToInt32(parts[1])));
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
                         // ignored
                     }
@@ -61,7 +51,7 @@ namespace ProxyChecker
 
         private void proxyTextBox_Enter(object sender, EventArgs e)
         {
-            if (proxyTextBox.Text == "IP:PORT:USERNAME:PASSWORD")
+            if (proxyTextBox.Text == @"IP:PORT:USERNAME:PASSWORD")
             {
                 proxyTextBox.Text = "";
             }
@@ -70,7 +60,7 @@ namespace ProxyChecker
         private void proxyTextBox_Leave(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(proxyTextBox.Text))
-                proxyTextBox.Text = "IP:PORT:USERNAME:PASSWORD";
+                proxyTextBox.Text = @"IP:PORT:USERNAME:PASSWORD";
         }
     }
 }
