@@ -5,7 +5,7 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ProxyChecker
+namespace ProxyFilter
 {
     public partial class MainFrom : Form
     {
@@ -137,7 +137,7 @@ namespace ProxyChecker
 
                 if (_proxyTested > 0) progressBar.Value = Convert.ToInt16(_proxyTested * 100.0 / _proxyNum);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 MessageBox.Show(@"Error 4! Error logged and sent off to be fixed");
             }
@@ -145,26 +145,25 @@ namespace ProxyChecker
 
         private async void btnStartTestB_Click(object sender, EventArgs e)
         {
-            if (!_isWorking)
-            {
-                _isWorking = true;
-                _startTime = DateTime.Now;
-                await TestProxyList(false);
-                _isWorking = false;
-                progressLabel.Text = $@"{_proxyNum} / {_proxyNum} Proxies Tested";
-            }
+            if (_isWorking) return;
+            _isWorking = true;
+            _startTime = DateTime.Now;
+            await TestProxyList(false);
+            _isWorking = false;
+            progressLabel.Text = $@"{_proxyNum} / {_proxyNum} Proxies Tested";
+            progressBar.Value = progressBar.Maximum;
         }
 
         private async void btnStartTestA_Click(object sender, EventArgs e)
         {
-            if (!_isWorking)
-            {
-                _isWorking = true;
-                _startTime = DateTime.Now;
-                await TestProxyList(true);
-                _isWorking = false;
-                progressLabel.Text = $@"{_proxyNum} / {_proxyNum} Proxies Tested";
-            }
+            if (_isWorking) return;
+
+            _isWorking = true;
+            _startTime = DateTime.Now;
+            await TestProxyList(true);
+            _isWorking = false;
+            progressLabel.Text = $@"{_proxyNum} / {_proxyNum} Proxies Tested";
+            progressBar.Value = progressBar.Maximum;
         }
 
         private void ProxyDataGridView_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)

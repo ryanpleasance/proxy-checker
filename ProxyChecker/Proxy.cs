@@ -8,7 +8,7 @@ using System.Diagnostics;
 using System.Net.NetworkInformation;
 using System.Net.Http;
 
-namespace ProxyChecker
+namespace ProxyFilter
 {
     public class Proxy
     {

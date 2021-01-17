@@ -1,4 +1,4 @@
-﻿namespace ProxyChecker
+﻿namespace ProxyFilter
 {
     partial class AddProxyForm
     {

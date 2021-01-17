@@ -6,7 +6,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProxyChecker
+namespace ProxyFilter
 {
     internal class ProxyTester
     {
@@ -17,8 +17,8 @@ namespace ProxyChecker
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(new Uri(Url));
 
             request.UserAgent = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36";
-            request.Timeout = 2000;
-            request.ReadWriteTimeout = 100000;
+            request.Timeout = 5000;
+            request.ReadWriteTimeout = 10000;
             request.Method = "HEAD";
 
             if (!string.IsNullOrWhiteSpace(proxy.Username))
@@ -32,7 +32,7 @@ namespace ProxyChecker
                 request.Proxy = Proxy.Parse(proxy);
 
                 sw.Start();
-                var response = request.GetResponse();
+                request.GetResponse();
                 sw.Stop();
             }
             catch (Exception)
@@ -49,8 +49,8 @@ namespace ProxyChecker
             var request = (HttpWebRequest)WebRequest.Create(new Uri(Url));
 
             request.UserAgent = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36";
-            request.Timeout = 2000;
-            request.ReadWriteTimeout = 100000;
+            request.Timeout = 5000;
+            request.ReadWriteTimeout = 10000;
 
             if (!string.IsNullOrWhiteSpace(proxy.Username))
             {
@@ -63,7 +63,7 @@ namespace ProxyChecker
                 request.Proxy = Proxy.Parse(proxy);
 
                 sw.Start();
-                var response = request.GetResponse();
+                request.GetResponse();
                 sw.Stop();
             }
             catch (Exception)

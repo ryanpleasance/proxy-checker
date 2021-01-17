@@ -1,4 +1,4 @@
-﻿namespace ProxyChecker
+﻿namespace ProxyFilter
 {
     partial class MainFrom
     {
@@ -28,10 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainFrom));
             this.ProxyDataGridView = new System.Windows.Forms.DataGridView();
+            this.IP = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PORT = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.USER = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PASS = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SPEED = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.STATUS = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnAddProxy = new System.Windows.Forms.Button();
             this.btnStartTestA = new System.Windows.Forms.Button();
             this.btnExport = new System.Windows.Forms.Button();
@@ -43,12 +49,6 @@
             this.titleLabel = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.IP = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PORT = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.USER = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PASS = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SPEED = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.STATUS = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.ProxyDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -65,14 +65,14 @@
             this.ProxyDataGridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.ProxyDataGridView.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.ProxyDataGridView.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Corbel", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.ProxyDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Corbel", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.ProxyDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.ProxyDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.ProxyDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.IP,
@@ -81,14 +81,14 @@
             this.PASS,
             this.SPEED,
             this.STATUS});
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Corbel", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.ProxyDataGridView.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Corbel", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.ProxyDataGridView.DefaultCellStyle = dataGridViewCellStyle2;
             this.ProxyDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.ProxyDataGridView.Location = new System.Drawing.Point(12, 194);
             this.ProxyDataGridView.Name = "ProxyDataGridView";
@@ -105,6 +105,53 @@
             this.ProxyDataGridView.TabIndex = 0;
             this.ProxyDataGridView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.ProxyDataGridView_CellFormatting);
             this.ProxyDataGridView.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.ProxyDataGridView_RowsRemoved);
+            // 
+            // IP
+            // 
+            this.IP.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.IP.FillWeight = 125F;
+            this.IP.HeaderText = "IP";
+            this.IP.Name = "IP";
+            this.IP.ReadOnly = true;
+            // 
+            // PORT
+            // 
+            this.PORT.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.PORT.FillWeight = 50F;
+            this.PORT.HeaderText = "PORT";
+            this.PORT.Name = "PORT";
+            this.PORT.ReadOnly = true;
+            // 
+            // USER
+            // 
+            this.USER.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.USER.FillWeight = 75F;
+            this.USER.HeaderText = "USER";
+            this.USER.Name = "USER";
+            this.USER.ReadOnly = true;
+            // 
+            // PASS
+            // 
+            this.PASS.FillWeight = 75F;
+            this.PASS.HeaderText = "PASS";
+            this.PASS.Name = "PASS";
+            this.PASS.ReadOnly = true;
+            // 
+            // SPEED
+            // 
+            this.SPEED.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.SPEED.FillWeight = 50F;
+            this.SPEED.HeaderText = "SPEED";
+            this.SPEED.Name = "SPEED";
+            this.SPEED.ReadOnly = true;
+            // 
+            // STATUS
+            // 
+            this.STATUS.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.STATUS.FillWeight = 50F;
+            this.STATUS.HeaderText = "STATUS";
+            this.STATUS.Name = "STATUS";
+            this.STATUS.ReadOnly = true;
             // 
             // btnAddProxy
             // 
@@ -126,7 +173,7 @@
             this.btnStartTestA.Name = "btnStartTestA";
             this.btnStartTestA.Size = new System.Drawing.Size(130, 38);
             this.btnStartTestA.TabIndex = 2;
-            this.btnStartTestA.Text = "Quick Test";
+            this.btnStartTestA.Text = "DataSave Test";
             this.btnStartTestA.UseVisualStyleBackColor = true;
             this.btnStartTestA.Click += new System.EventHandler(this.btnStartTestA_Click);
             // 
@@ -222,58 +269,11 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(700, 9);
+            this.label1.Location = new System.Drawing.Point(685, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(59, 13);
+            this.label1.Size = new System.Drawing.Size(65, 13);
             this.label1.TabIndex = 12;
-            this.label1.Text = "v0.2 BETA";
-            // 
-            // IP
-            // 
-            this.IP.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.IP.FillWeight = 125F;
-            this.IP.HeaderText = "IP";
-            this.IP.Name = "IP";
-            this.IP.ReadOnly = true;
-            // 
-            // PORT
-            // 
-            this.PORT.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.PORT.FillWeight = 50F;
-            this.PORT.HeaderText = "PORT";
-            this.PORT.Name = "PORT";
-            this.PORT.ReadOnly = true;
-            // 
-            // USER
-            // 
-            this.USER.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.USER.FillWeight = 75F;
-            this.USER.HeaderText = "USER";
-            this.USER.Name = "USER";
-            this.USER.ReadOnly = true;
-            // 
-            // PASS
-            // 
-            this.PASS.FillWeight = 75F;
-            this.PASS.HeaderText = "PASS";
-            this.PASS.Name = "PASS";
-            this.PASS.ReadOnly = true;
-            // 
-            // SPEED
-            // 
-            this.SPEED.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.SPEED.FillWeight = 50F;
-            this.SPEED.HeaderText = "SPEED";
-            this.SPEED.Name = "SPEED";
-            this.SPEED.ReadOnly = true;
-            // 
-            // STATUS
-            // 
-            this.STATUS.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.STATUS.FillWeight = 50F;
-            this.STATUS.HeaderText = "STATUS";
-            this.STATUS.Name = "STATUS";
-            this.STATUS.ReadOnly = true;
+            this.label1.Text = "v0.25 BETA";
             // 
             // MainFrom
             // 
