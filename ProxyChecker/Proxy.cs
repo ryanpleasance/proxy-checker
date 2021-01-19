@@ -43,7 +43,7 @@ namespace ProxyFilter
             {
                 parsedProxy.Credentials = new NetworkCredential(input.Username, input.Password);
             }
-
+            
             return parsedProxy;
         }
     }

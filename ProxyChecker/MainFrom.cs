@@ -69,11 +69,11 @@ namespace ProxyFilter
 
                 await Task.Factory.StartNew(() =>
                 {
-                    Parallel.ForEach(ProxyList, new ParallelOptions {MaxDegreeOfParallelism = 32}, proxy =>
+                    Parallel.ForEach(ProxyList, new ParallelOptions {MaxDegreeOfParallelism = 48}, proxy =>
                     {
                         BeginInvoke((MethodInvoker) delegate { MarkTesting(proxy); });
 
-                        var result = fast ? ProxyTester.QuickTest(proxy, tbUrl.Text) : ProxyTester.PageLoadTest(proxy, tbUrl.Text);
+                        var result = ProxyTester.TestProxy(proxy, tbUrl.Text, fast).Result;
 
                         proxy.Speed = result.Speed;
                         proxy.Status = result.Status;
@@ -304,7 +304,7 @@ namespace ProxyFilter
         private void EstimateTimeLeft()
         {
             if (_proxyNum == _proxyTested) return;
-
+            
             var timeNow = DateTime.Now;
             var elapsedTime = (timeNow - _startTime).TotalSeconds;
 

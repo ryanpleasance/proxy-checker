@@ -2,8 +2,8 @@
 <DOCUMENT Type="Advanced Installer" CreateVersion="17.8" version="17.8" Modules="simple" RootPath="." Language="en" Id="{D5C3D6CE-342E-4DD5-B79D-DEB9ABDA22EB}">
   <COMPONENT cid="caphyon.advinst.msicomp.MsiPropsComponent">
     <ROW Property="AI_BITMAP_DISPLAY_MODE" Value="0"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_ProxyChecker.exe" Value="..\ProxyChecker\bin\Release"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_ProxyChecker.exe.config" Value="..\ProxyChecker\bin\Release"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_ProxyChecker.exe" Value="..\ProxyChecker\bin\Debug"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_ProxyChecker.exe.config" Value="..\ProxyChecker\bin\Debug"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_ProxyChecker.exe" Value="Proxy Filter.exe"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_ProxyChecker.exe.config" Value="Proxy Filter.exe.config"/>
     <ROW Property="ALLUSERS" Value="1"/>
@@ -11,10 +11,10 @@
     <ROW Property="ARPPRODUCTICON" Value="SR.exe" Type="8"/>
     <ROW Property="ARPURLINFOABOUT" Value="www.slick.rentals"/>
     <ROW Property="Manufacturer" Value="RYXX x SlickRentals"/>
-    <ROW Property="ProductCode" Value="1033:{AF21DE43-C9EE-4341-89F9-89138BE0BBB3} " Type="16"/>
+    <ROW Property="ProductCode" Value="1033:{E5D343A0-A511-4F08-B286-9F38E1AC33A2} " Type="16"/>
     <ROW Property="ProductLanguage" Value="1033"/>
     <ROW Property="ProductName" Value="Proxy Filter"/>
-    <ROW Property="ProductVersion" Value="0.2.6" Type="32"/>
+    <ROW Property="ProductVersion" Value="0.2.7" Type="32"/>
     <ROW Property="SecureCustomProperties" Value="OLDPRODUCTS;AI_NEWERPRODUCTFOUND"/>
     <ROW Property="UpgradeCode" Value="{F875A273-29A6-4BE8-9417-6A81ED7D971A}"/>
     <ROW Property="WindowsType9X" MultiBuildValue="DefaultBuild:Windows 9x/ME" ValueLocId="-"/>
